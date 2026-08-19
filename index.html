@@ -94,6 +94,45 @@
             text-align: center;
         }
 
+        .offer-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .offer-form label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .offer-form input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .offer-form input:focus {
+            border-color: #111827;
+        }
+
+        .offer-button {
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            background: #25D366;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .offer-button:hover {
+            opacity: 0.9;
+        }
+
         footer {
             background: #111827;
             color: #d1d5db;
@@ -144,7 +183,37 @@
 </section>
 
 <section>
+    <h2>Teklif Al</h2>
+    <p>Yükleme ve indirme adreslerinizi yazın, WhatsApp üzerinden bize ulaşın.</p>
+
+    <br>
+
+    <div class="offer-form">
+
+        <label for="loadingAddress">Yükleme Adresi</label>
+        <input
+            type="text"
+            id="loadingAddress"
+            placeholder="Yükleme adresini yazınız"
+        >
+
+        <label for="unloadingAddress">İndirme Adresi</label>
+        <input
+            type="text"
+            id="unloadingAddress"
+            placeholder="İndirme adresini yazınız"
+        >
+
+        <button class="offer-button" onclick="sendOffer()">
+            WhatsApp'tan Teklif Al
+        </button>
+
+    </div>
+</section>
+
+<section>
     <h2>Hakkımızda</h2>
+
     <p>
         Doğan Nakliyat olarak şehir içi ve şehirler arası
         nakliye hizmeti vermekteyiz.
@@ -165,6 +234,25 @@
 <footer>
     © 2026 Doğan Nakliyat - Tüm Hakları Saklıdır.
 </footer>
+
+<script>
+    function sendOffer() {
+        const loading = document.getElementById("loadingAddress").value.trim();
+        const unloading = document.getElementById("unloadingAddress").value.trim();
+
+        if (loading === "" || unloading === "") {
+            alert("Lütfen yükleme ve indirme adreslerini doldurun.");
+            return;
+        }
+
+        const message =
+            "Merhabalar Doğan Nakliyat web siteniz üzerinden ulaştım. Fiyat teklifi almak istiyorum.%0A%0A" +
+            "Yükleme Adresi: " + encodeURIComponent(loading) + "%0A" +
+            "İndirme Adresi: " + encodeURIComponent(unloading);
+
+        window.location.href = "https://wa.me/905453226760?text=" + message;
+    }
+</script>
 
 </body>
 </html>
